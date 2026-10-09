@@ -32,11 +32,11 @@ export default function App() {
     ...(SHOW_FAN_CHARACTERS ? fanCharacters : []),
     // Characters made in older versions are missing some fields; fill them in.
     ...customCharacters.map((c) => ({
-      role: c.tagline || 'A character of your own making',
-      genre: 'Your Character',
+      role: c.tagline || 'შენი შექმნილი პერსონაჟი',
+      genre: 'შენი პერსონაჟი',
       category: 'custom',
       moods: [],
-      storyTitle: `A Story with ${c.name}`,
+      storyTitle: `ისტორია: ${c.name}`,
       description: c.personality,
       tags: [],
       custom: true,

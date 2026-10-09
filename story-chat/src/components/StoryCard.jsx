@@ -20,7 +20,7 @@ export default function StoryCard({ character: c, variant = 'grid', onOpen }) {
 
       <div className="story-body">
         <h3 className="story-title">{c.storyTitle}</h3>
-        {isSpotlight && c.quote && <blockquote className="story-quote">"{c.quote}"</blockquote>}
+        {isSpotlight && c.quote && <blockquote className="story-quote">„{c.quote}“</blockquote>}
         <p className="story-desc">{c.description}</p>
         {!isSpotlight && c.tags?.length > 0 && (
           <ul className="story-tags">
@@ -30,9 +30,9 @@ export default function StoryCard({ character: c, variant = 'grid', onOpen }) {
       </div>
 
       <footer className="story-footer">
-        <span className="story-meta">{c.fan ? 'Fan character' : c.custom ? 'Your character' : 'Ready to play'}</span>
+        <span className="story-meta">{c.fan ? 'ფანების პერსონაჟი' : c.custom ? 'შენი პერსონაჟი' : 'მზადაა სათამაშოდ'}</span>
         <button className={isSpotlight ? 'btn-primary btn-small' : 'btn-link'} onClick={() => onOpen(c.id)}>
-          Start Story <span aria-hidden="true">→</span>
+          დაწყება <span aria-hidden="true">→</span>
         </button>
       </footer>
     </article>

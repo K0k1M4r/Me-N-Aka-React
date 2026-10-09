@@ -1,8 +1,7 @@
 import { useState } from 'react'
+import { GENDERS } from '../data/profile.js'
 
-const PRONOUNS = ['she/her', 'he/him', 'they/them']
-
-// First screen (name, pronouns, 18+). Also used to edit your profile later.
+// First screen (name, gender, 18+). Also used to edit your profile later.
 export default function AgeGate({ initial, onEnter }) {
   const [name, setName] = useState(initial?.name || '')
   const [pronouns, setPronouns] = useState(initial?.pronouns || 'they/them')
@@ -12,8 +11,8 @@ export default function AgeGate({ initial, onEnter }) {
   return (
     <main className="gate">
       <span className="eyebrow-pill">✦ Story Chat</span>
-      <h1 className="gate-title">{initial ? 'Your profile' : 'Your story starts here.'}</h1>
-      <p className="gate-lead">Characters will use your name and pronouns in every story.</p>
+      <h1 className="gate-title">{initial ? 'შენი პროფილი' : 'შენი ისტორია აქ იწყება.'}</h1>
+      <p className="gate-lead">პერსონაჟები ყველა ისტორიაში შენს სახელს გამოიყენებენ და ისე მოგმართავენ, როგორც აქ აირჩევ.</p>
 
       <form
         className="gate-form"
@@ -23,22 +22,22 @@ export default function AgeGate({ initial, onEnter }) {
         }}
       >
         <label className="field">
-          <span>What should characters call you?</span>
-          <input value={name} onChange={(e) => setName(e.target.value)} maxLength={30} placeholder="Your name" />
+          <span>რა გქვია?</span>
+          <input value={name} onChange={(e) => setName(e.target.value)} maxLength={30} placeholder="შენი სახელი" />
         </label>
 
         <fieldset className="field">
-          <span>Pronouns</span>
+          <span>როგორ მოგმართონ პერსონაჟებმა?</span>
           <div className="pronoun-row">
-            {PRONOUNS.map((p) => (
+            {GENDERS.map((g) => (
               <button
                 type="button"
-                key={p}
-                className={'pill pill-boxed' + (pronouns === p ? ' is-active' : '')}
-                aria-pressed={pronouns === p}
-                onClick={() => setPronouns(p)}
+                key={g.value}
+                className={'pill pill-boxed' + (pronouns === g.value ? ' is-active' : '')}
+                aria-pressed={pronouns === g.value}
+                onClick={() => setPronouns(g.value)}
               >
-                {p}
+                {g.label}
               </button>
             ))}
           </div>
@@ -47,11 +46,11 @@ export default function AgeGate({ initial, onEnter }) {
         {!initial && (
           <label className="check">
             <input type="checkbox" checked={isAdult} onChange={(e) => setIsAdult(e.target.checked)} />
-            <span>I am 18 or older</span>
+            <span>ვადასტურებ, რომ 18 წლის ან უფროსი ვარ</span>
           </label>
         )}
 
-        <button className="btn-primary" disabled={!canEnter}>{initial ? 'Save' : 'Start reading'}</button>
+        <button className="btn-primary" disabled={!canEnter}>{initial ? 'შენახვა' : 'დაწყება'}</button>
       </form>
     </main>
   )

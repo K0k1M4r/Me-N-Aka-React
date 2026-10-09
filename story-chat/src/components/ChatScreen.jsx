@@ -95,7 +95,7 @@ export default function ChatScreen({ character, profile, onBack }) {
   }
 
   function handleRestart() {
-    if (confirm(`Restart your story with ${character.name}? This erases the chat and their memory of it, and you can pick a new mode.`)) {
+    if (confirm('დავიწყოთ ისტორია თავიდან? ჩატი და პერსონაჟის მეხსიერება წაიშლება, რეჟიმს კი ხელახლა აირჩევ.')) {
       setError(null)
       setChat(emptyChat())
     }
@@ -108,19 +108,19 @@ export default function ChatScreen({ character, profile, onBack }) {
   return (
     <div className="chat" style={{ '--c1': character.colors[0], '--c2': character.colors[1] }}>
       <header className="topbar chat-topbar">
-        <button className="btn-ghost" onClick={onBack} aria-label="Back to characters">Back</button>
+        <button className="btn-ghost" onClick={onBack} aria-label="პერსონაჟებთან დაბრუნება">უკან</button>
         <Avatar character={character} size={36} />
         <div className="chat-title">
           <h1>{character.name}</h1>
           <span className="mode-label">{describeMode(chat.mode).label}</span>
         </div>
-        <button className="btn-ghost" onClick={handleRestart}>Restart</button>
+        <button className="btn-ghost" onClick={handleRestart}>თავიდან</button>
       </header>
 
       <ol className="messages">
         {chat.memory && (
           <li className="memory-note">
-            {character.name} remembers {chat.summarizedCount} earlier messages
+            მეხსიერებაში შენახულია {chat.summarizedCount} ადრინდელი შეტყობინება
           </li>
         )}
         {chat.messages.map((m, i) => (
@@ -129,14 +129,14 @@ export default function ChatScreen({ character, profile, onBack }) {
           </li>
         ))}
         {isTyping && (
-          <li className="msg msg-character typing" aria-label={`${character.name} is typing`}>
+          <li className="msg msg-character typing" aria-label={`${character.name} წერს…`}>
             <span /><span /><span />
           </li>
         )}
         {error && (
           <li className="error">
             <p>{error}</p>
-            <button className="btn-ghost" onClick={() => requestReply(chat)}>Try again</button>
+            <button className="btn-ghost" onClick={() => requestReply(chat)}>ხელახლა ცდა</button>
           </li>
         )}
         <li ref={bottomRef} aria-hidden="true" />
@@ -150,10 +150,10 @@ export default function ChatScreen({ character, profile, onBack }) {
             if (e.key === 'Enter' && !e.shiftKey) handleSend(e)
           }}
           rows={1}
-          placeholder="Say something, or *do something*"
-          aria-label="Your message"
+          placeholder="თქვი რამე, ან *გააკეთე რამე*"
+          aria-label="შენი შეტყობინება"
         />
-        <button className="btn-primary" disabled={!input.trim() || isTyping || chat.messages.length === 0}>Send</button>
+        <button className="btn-primary" disabled={!input.trim() || isTyping || chat.messages.length === 0}>გაგზავნა</button>
       </form>
     </div>
   )

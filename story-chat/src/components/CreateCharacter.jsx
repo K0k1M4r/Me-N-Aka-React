@@ -21,7 +21,7 @@ export default function CreateCharacter({ onCreate, onCancel }) {
 
   // Live preview of the card while you type.
   const preview = {
-    name: form.name || 'Your character',
+    name: form.name || 'შენი პერსონაჟი',
     colors: PALETTES[palette],
   }
 
@@ -31,11 +31,11 @@ export default function CreateCharacter({ onCreate, onCancel }) {
     onCreate({
       id: 'custom-' + Date.now(),
       name: form.name.trim(),
-      role: form.role.trim() || 'A character of your own making',
-      genre: 'Your Character',
+      role: form.role.trim() || 'შენი შექმნილი პერსონაჟი',
+      genre: 'შენი პერსონაჟი',
       category: 'custom',
       moods: [],
-      storyTitle: form.storyTitle.trim() || `A Story with ${form.name.trim()}`,
+      storyTitle: form.storyTitle.trim() || `ისტორია: ${form.name.trim()}`,
       description: form.personality.trim(),
       tags: form.tags.split(',').map((t) => t.trim()).filter(Boolean).slice(0, 3),
       personality: form.personality.trim(),
@@ -49,44 +49,44 @@ export default function CreateCharacter({ onCreate, onCancel }) {
   return (
     <main className="create">
       <div className="create-head">
-        <span className="eyebrow">✦ Character studio</span>
-        <h1>Create your dream character</h1>
-        <p className="section-sub">Only the name, personality and first message are required. For a famous character, the name and a scenario are often enough.</p>
+        <span className="eyebrow">✦ პერსონაჟების სტუდია</span>
+        <h1>შექმენი შენი იდეალური პერსონაჟი</h1>
+        <p className="section-sub">სავალდებულოა მხოლოდ სახელი, ხასიათი და პირველი შეტყობინება. ცნობილი პერსონაჟისთვის ხშირად სახელი და სცენარიც საკმარისია.</p>
       </div>
 
       <div className="create-layout">
         <form className="create-form" onSubmit={handleSubmit}>
           <label className="field">
-            <span>Name</span>
-            <input value={form.name} onChange={update('name')} maxLength={40} placeholder="Selene Ward" />
+            <span>სახელი</span>
+            <input value={form.name} onChange={update('name')} maxLength={40} placeholder="სელინ უორდი" />
           </label>
           <label className="field">
-            <span>Who are they? <em>(optional)</em></span>
-            <input value={form.role} onChange={update('role')} maxLength={70} placeholder="Academy rival & reluctant roommate" />
+            <span>ვინ არის? <em>(არასავალდებულო)</em></span>
+            <input value={form.role} onChange={update('role')} maxLength={70} placeholder="აკადემიის მეტოქე და უნებლიე ოთახის მეზობელი" />
           </label>
           <label className="field">
-            <span>Story title <em>(optional)</em></span>
-            <input value={form.storyTitle} onChange={update('storyTitle')} maxLength={70} placeholder="Roommates with My Rival" />
+            <span>ისტორიის სათაური <em>(არასავალდებულო)</em></span>
+            <input value={form.storyTitle} onChange={update('storyTitle')} maxLength={70} placeholder="ოთახის მეზობელი, ჩემი მეტოქე" />
           </label>
           <label className="field">
-            <span>Personality</span>
-            <textarea value={form.personality} onChange={update('personality')} rows={3} placeholder="Sharp-tongued, competitive, secretly kind. Hates losing." />
+            <span>ხასიათი</span>
+            <textarea value={form.personality} onChange={update('personality')} rows={3} placeholder="ენაბასრი, შეჯიბრის მოყვარული, გულში კეთილი. წაგება ეჯავრება." />
           </label>
           <label className="field">
-            <span>Scenario <em>(optional)</em></span>
-            <textarea value={form.scenario} onChange={update('scenario')} rows={3} placeholder="Where are you, and how did you meet?" />
+            <span>სცენარი <em>(არასავალდებულო)</em></span>
+            <textarea value={form.scenario} onChange={update('scenario')} rows={3} placeholder="სად ხართ და როგორ გაიცანით ერთმანეთი?" />
           </label>
           <label className="field">
-            <span>First message</span>
-            <textarea value={form.greeting} onChange={update('greeting')} rows={3} placeholder="*She drops her bag on the other bed.* You've got to be kidding me." />
+            <span>პირველი შეტყობინება</span>
+            <textarea value={form.greeting} onChange={update('greeting')} rows={3} placeholder="*ჩანთას მეორე საწოლზე ისვრის.* ხუმრობ, არა?" />
           </label>
           <label className="field">
-            <span>Tags <em>(optional, comma separated)</em></span>
-            <input value={form.tags} onChange={update('tags')} placeholder="Rivals, Slow Burn, Academy" />
+            <span>თეგები <em>(არასავალდებულო, მძიმით გამოყოფილი)</em></span>
+            <input value={form.tags} onChange={update('tags')} placeholder="მეტოქეები, ნელი რომანტიკა, აკადემია" />
           </label>
 
           <fieldset className="field">
-            <span>Card colors</span>
+            <span>ბარათის ფერები</span>
             <div className="swatches">
               {PALETTES.map(([a, b], i) => (
                 <button
@@ -95,7 +95,7 @@ export default function CreateCharacter({ onCreate, onCancel }) {
                   className={'swatch' + (palette === i ? ' is-picked' : '')}
                   style={{ background: `linear-gradient(150deg, ${a}, ${b})` }}
                   onClick={() => setPalette(i)}
-                  aria-label={`Color option ${i + 1}`}
+                  aria-label={`ფერი ${i + 1}`}
                   aria-pressed={palette === i}
                 />
               ))}
@@ -103,16 +103,16 @@ export default function CreateCharacter({ onCreate, onCancel }) {
           </fieldset>
 
           <div className="create-actions">
-            <button type="button" className="btn-ghost" onClick={onCancel}>Cancel</button>
-            <button className="btn-primary" disabled={!ready}>Create and start chatting</button>
+            <button type="button" className="btn-ghost" onClick={onCancel}>გაუქმება</button>
+            <button className="btn-primary" disabled={!ready}>შექმნა და ჩატის დაწყება</button>
           </div>
         </form>
 
-        <aside className="create-preview" aria-label="Card preview">
+        <aside className="create-preview" aria-label="ბარათის გადახედვა">
           <Cover character={preview}>
             <div className="cover-caption">
               <span className="cover-name">{preview.name}</span>
-              <span className="cover-role-small">{form.role || 'A character of your own making'}</span>
+              <span className="cover-role-small">{form.role || 'შენი შექმნილი პერსონაჟი'}</span>
             </div>
           </Cover>
         </aside>

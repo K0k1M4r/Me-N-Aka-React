@@ -3,10 +3,10 @@ import StoryCard from './StoryCard.jsx'
 import { MOODS, CATEGORIES } from '../data/filters.js'
 
 const FEATURES = [
-  { icon: '❖', label: 'Immersive chat & endless stories' },
-  { icon: '◉', label: 'Soul & deep memory' },
-  { icon: '♡', label: 'Friendly or flirty modes' },
-  { icon: '✎', label: 'Create your dream character' },
+  { icon: '❖', label: 'ცოცხალი ჩატი და უსასრულო ისტორიები' },
+  { icon: '◉', label: 'ხასიათი და ღრმა მეხსიერება' },
+  { icon: '♡', label: 'მეგობრული ან რომანტიკული რეჟიმი' },
+  { icon: '✎', label: 'შექმენი შენი პერსონაჟი' },
 ]
 
 export default function Home({ characters, onOpen, onCreate }) {
@@ -33,11 +33,11 @@ export default function Home({ characters, onOpen, onCreate }) {
   return (
     <main className="home">
       <section className="hero">
-        <span className="eyebrow-pill">✦ Endless interactive stories</span>
-        <h1 className="hero-title">Step into a story that answers back.</h1>
+        <span className="eyebrow-pill">✦ უსასრულო ინტერაქტიული ისტორიები</span>
+        <h1 className="hero-title">ისტორია, რომელიც გპასუხობს.</h1>
         <p className="hero-lead">
-          <strong>You're the main character.</strong> Slow-burn romance, a fantasy adventure, or a
-          friend who always picks up at 2 a.m. No scripts: every message you send pushes the story somewhere new.
+          <strong>მთავარი გმირი შენ ხარ.</strong> ნელ-ნელა გაჩენილი სიყვარული, ფენტეზი თავგადასავალი ან
+          მეგობარი, რომელიც ღამის ორ საათზეც აგიღებს ტელეფონს. სცენარი არ არსებობს: შენი ყოველი შეტყობინება ისტორიას ახალი მიმართულებით წაიყვანს.
         </p>
         <ul className="feature-chips">
           {FEATURES.map((f) => (
@@ -50,9 +50,9 @@ export default function Home({ characters, onOpen, onCreate }) {
         <section className="section">
           <div className="section-head">
             <div>
-              <span className="eyebrow">✦ Spotlight releases</span>
-              <h2>What's your story tonight?</h2>
-              <p className="section-sub">Pick one of today's headline stories and step straight into the driver's seat.</p>
+              <span className="eyebrow">✦ დღის რჩეული</span>
+              <h2>რა ისტორია გინდა დღეს?</h2>
+              <p className="section-sub">აირჩიე დღის ერთ-ერთი ისტორია და მაშინვე დაიწყე.</p>
             </div>
           </div>
           <div className="spotlight-grid">
@@ -66,8 +66,8 @@ export default function Home({ characters, onOpen, onCreate }) {
       <section className="section">
         <div className="section-head section-head-split">
           <div>
-            <h2>Story tropes & roleplay moods</h2>
-            <p className="section-sub">Filter by archetype or vibe, or search for your dream companion.</p>
+            <h2>სიუჟეტები და განწყობები</h2>
+            <p className="section-sub">გაფილტრე ჟანრის ან განწყობის მიხედვით, ან მოძებნე შენი იდეალური პერსონაჟი.</p>
           </div>
           <label className="search">
             <span className="search-icon" aria-hidden="true">⌕</span>
@@ -75,14 +75,14 @@ export default function Home({ characters, onOpen, onCreate }) {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by trope, name, mood…"
-              aria-label="Search stories"
+              placeholder="ძებნა სახელით, ჟანრით, განწყობით…"
+              aria-label="ისტორიების ძებნა"
             />
           </label>
         </div>
 
         <div className="filter-row">
-          <span className="filter-label">Story mood:</span>
+          <span className="filter-label">განწყობა:</span>
           {MOODS.map((m) => (
             <button
               key={m.id}
@@ -111,9 +111,9 @@ export default function Home({ characters, onOpen, onCreate }) {
         <div className="story-grid">
           <article className="create-card">
             <span className="create-plus" aria-hidden="true">+</span>
-            <h3>Create your dream AI character</h3>
-            <p>Got a specific fictional crush in mind? Type a name, describe their personality, and start a story right away.</p>
-            <button className="btn-outline" onClick={onCreate}>Launch Character Studio <span aria-hidden="true">→</span></button>
+            <h3>შექმენი შენი იდეალური პერსონაჟი</h3>
+            <p>გყავს საყვარელი გამოგონილი პერსონაჟი? ჩაწერე სახელი, აღწერე ხასიათი და ისტორია მაშინვე დაიწყება.</p>
+            <button className="btn-outline" onClick={onCreate}>პერსონაჟის შექმნა <span aria-hidden="true">→</span></button>
           </article>
 
           {visible.map((c) => (
@@ -122,11 +122,11 @@ export default function Home({ characters, onOpen, onCreate }) {
         </div>
 
         {visible.length === 0 && (
-          <p className="empty">No stories match that. Try another mood or search.</p>
+          <p className="empty">ასეთი ისტორია ვერ მოიძებნა. სცადე სხვა განწყობა ან საძიებო სიტყვა.</p>
         )}
       </section>
 
-      <footer className="site-footer">Story Chat · Step into the story where you call the shots</footer>
+      <footer className="site-footer">Story Chat · ისტორია, სადაც გადაწყვეტილებებს შენ იღებ</footer>
     </main>
   )
 }

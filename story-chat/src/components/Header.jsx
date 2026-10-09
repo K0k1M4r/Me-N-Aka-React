@@ -1,6 +1,8 @@
+import { genderLabel } from '../data/profile.js'
+
 const TABS = [
-  { id: 'stories', label: 'Stories & Companions', icon: '✦' },
-  { id: 'create', label: 'Dream Character', icon: '+' },
+  { id: 'stories', label: 'ისტორიები', icon: '✦' },
+  { id: 'create', label: 'შექმენი პერსონაჟი', icon: '+' },
 ]
 
 export default function Header({ screen, profile, onNavigate, onEditProfile }) {
@@ -11,11 +13,11 @@ export default function Header({ screen, profile, onNavigate, onEditProfile }) {
           <span className="brand-mark" aria-hidden="true">✦</span>
           <span className="brand-text">
             <span className="brand-name">Story <em>Chat</em></span>
-            <span className="brand-sub">Endless AI stories & companions</span>
+            <span className="brand-sub">AI ისტორიები და პერსონაჟები</span>
           </span>
         </button>
 
-        <nav className="tabs" aria-label="Main">
+        <nav className="tabs" aria-label="მთავარი მენიუ">
           {TABS.map((t) => (
             <button
               key={t.id}
@@ -29,11 +31,11 @@ export default function Header({ screen, profile, onNavigate, onEditProfile }) {
           ))}
         </nav>
 
-        <button className="profile-chip" onClick={onEditProfile} title="Edit profile">
+        <button className="profile-chip" onClick={onEditProfile} title="პროფილის შეცვლა">
           <span className="profile-initial" aria-hidden="true">{profile.name.charAt(0).toUpperCase()}</span>
           <span className="profile-text">
             <span className="profile-name">{profile.name}</span>
-            <span className="profile-pronouns">{profile.pronouns}</span>
+            <span className="profile-pronouns">{genderLabel(profile.pronouns)}</span>
           </span>
         </button>
       </div>

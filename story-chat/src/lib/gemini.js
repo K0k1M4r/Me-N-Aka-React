@@ -1,6 +1,8 @@
 import { describeMode } from '../data/modes.js'
 
 // Change this if Google releases a newer model you want to use.
+// Tip: 'gemini-2.5-pro' writes noticeably better Georgian, but is slower
+// and the free tier allows fewer messages per day.
 const MODEL = 'gemini-2.5-flash'
 const URL = `/api/gemini/v1beta/models/${MODEL}:generateContent`
 
@@ -30,15 +32,15 @@ async function callGemini(systemText, contents, safety = 'default') {
   if (!res.ok) {
     const err = await res.json().catch(() => ({}))
     if (res.status === 400 || res.status === 403) {
-      throw new Error('Gemini rejected the request. Check GEMINI_API_KEY in your .env file, then restart npm run dev.')
+      throw new Error('Gemini-მ მოთხოვნა უარყო. შეამოწმე GEMINI_API_KEY შენს .env ფაილში და თავიდან გაუშვი npm run dev.')
     }
-    throw new Error(err.error?.message || `Gemini request failed (${res.status}).`)
+    throw new Error(err.error?.message || `Gemini-სთან დაკავშირება ვერ მოხერხდა (${res.status}).`)
   }
 
   const data = await res.json()
   const text = data.candidates?.[0]?.content?.parts?.map((p) => p.text || '').join('')
   if (!text) {
-    throw new Error('The reply was blocked by safety filters. Try steering the story another way.')
+    throw new Error('პასუხი უსაფრთხოების ფილტრმა დაბლოკა. სცადე, ისტორია სხვა მიმართულებით წაიყვანო.')
   }
   return text.trim()
 }
@@ -55,6 +57,14 @@ The user's name is ${profile.name} (pronouns: ${profile.pronouns}). They play th
 
 ${describeMode(mode).prompt}
 ${memory ? `\nWhat has happened so far (your memory of earlier events):\n${memory}\n` : ''}
+Language (very important):
+- Write every reply in Georgian (ქართული), in Georgian script, even if the user writes in English or in Latin letters (translit).
+- Sound like a real person talking today in Tbilisi: natural, modern, spoken Georgian. Avoid bookish, literary or overly formal phrasing, and never translate English expressions word for word. Use the slang, interjections and rhythm a real Georgian speaker of your personality would use.
+- Address the user with informal შენ, unless this character would realistically stay formal (then use თქვენ).
+- Georgian has no gendered pronouns: reflect the user's pronouns only through word choice where it naturally comes up (გოგო / ბიჭი, ქალბატონო / ბატონო, etc.).
+- Be careful with grammar: correct verb agreement with both subject and object, and the correct case for the subject in each tense (nominative, ergative -მა, or dative -ს).
+- Keep your own name exactly as written above.
+
 Rules:
 - Stay in character at all times. Never mention being an AI.
 - Write actions and descriptions between *asterisks*, dialogue as plain text.
@@ -68,7 +78,7 @@ function toContents(messages, character) {
     // Brand-new story: ask the character to open it in the chosen mode.
     return [{
       role: 'user',
-      parts: [{ text: `(Start the story with your opening message, written for the relationship and tone above. For inspiration, the default opening is: "${character.greeting}")` }],
+      parts: [{ text: `(Start the story with your opening message, in natural Georgian, written for the relationship and tone above. For inspiration, the default opening is: "${character.greeting}")` }],
     }]
   }
 

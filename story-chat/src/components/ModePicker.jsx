@@ -11,12 +11,12 @@ export default function ModePicker({ character, onPick, onBack }) {
   let question, options, choose, goBack
 
   if (!relationship) {
-    question = `How do you want to meet ${character.name}?`
+    question = `როგორ გინდა გაიცნო ${character.name}?`
     options = RELATIONSHIPS
     choose = (id) => setRelationship(id)
     goBack = onBack
   } else if (!tone) {
-    question = relationship === 'friendly' ? 'How should they talk?' : 'How far should it go?'
+    question = relationship === 'friendly' ? 'როგორ ილაპარაკოს?' : 'რამდენად შორს წავიდეს?'
     options = TONES[relationship]
     choose = (id) => {
       // Friendly stories are ready now. Flirty ones get one more question.
@@ -25,7 +25,7 @@ export default function ModePicker({ character, onPick, onBack }) {
     }
     goBack = () => setRelationship(null)
   } else {
-    question = `How does ${character.name} feel about you?`
+    question = `რას გრძნობს ${character.name} შენ მიმართ?`
     options = ATTITUDES
     choose = (id) => onPick({ relationship, tone, attitude: id })
     goBack = () => setTone(null)
@@ -34,7 +34,7 @@ export default function ModePicker({ character, onPick, onBack }) {
   return (
     <div className="picker" style={{ '--c1': character.colors[0], '--c2': character.colors[1] }}>
       <header className="topbar">
-        <button className="btn-ghost" onClick={goBack}>Back</button>
+        <button className="btn-ghost" onClick={goBack}>უკან</button>
       </header>
 
       <div className="picker-body">
